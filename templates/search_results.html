@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Search Results for "{{ query }}"</h2>
+    
+    {% if blogs %}
+    <div class="row">
+        {% for blog in blogs %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                {% if blog.image %}
+                    <img src="{{ blog.image }}" class="card-img-top" alt="{{ blog.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">{{ blog.content[:150] }}...</p>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a href="/blog/{{ blog.id }}" class="btn btn-sm btn-primary">
+                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+        <h4 class="text-muted">No results found</h4>
+        <p class="text-muted">Try different search terms</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

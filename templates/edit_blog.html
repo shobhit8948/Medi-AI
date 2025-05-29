@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 800px;">
+        <div class="card-body">
+            <h2 class="card-title mb-4 text-center">
+                <i class="fas fa-edit me-2"></i> Edit Blog Post
+            </h2>
+            
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Title</label>
+                    <input type="text" class="form-control form-control-lg" name="title" value="{{ blog.title }}" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Content</label>
+                    <textarea name="content" class="form-control" rows="10" required>{{ blog.content }}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Update Image</label>
+                    <input type="file" class="form-control" name="image">
+                    <small class="text-muted">Leave blank to keep current image</small>
+                </div>
+
+                {% if blog.image %}
+                <div class="mb-4 text-center">
+                    <p class="fw-bold">Current Image:</p>
+                    <img src="{{ blog.image }}" class="img-thumbnail" style="max-height: 200px;">
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" name="remove_image" id="removeImage">
+                        <label class="form-check-label" for="removeImage">
+                            Remove current image
+                        </label>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="fas fa-save me-1"></i> Update Blog
+                    </button>
+                    <a href="/myblogs" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Back to My Blogs
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
